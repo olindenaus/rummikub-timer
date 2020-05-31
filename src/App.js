@@ -26,11 +26,9 @@ function App() {
   }, [handleSpaceBar]);
 
   const onSwitch = () => {
-    console.log("onSwitch()");
-    
     let i = ((counter + 1) % (names.length));
     setCounter(counter => counter + 1);
-    setIndex(index => i);
+    setIndex(i);
   }
 
   const addName = (name) => {

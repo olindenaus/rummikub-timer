@@ -26,8 +26,6 @@ export const NameInput = ({ onNameAdd }) => {
     }
 
     const onInputChange = (event) => {
-        console.log(name);
-
         setName(event.target.value);
     }
 

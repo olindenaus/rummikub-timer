@@ -9,17 +9,13 @@ export const Timer = ({ name, onSwitch }) => {
     const [displayTime, setDisplayTime] = useState('');
 
     const handleSpaceBarButton = useCallback(({ keyCode }) => {
-        if (keyCode === 32) {
-            console.log("space");
+        if (keyCode === 32)
             switchPlayer();
-        }
     }, [running]);
 
     const handleEnterButton = useCallback(({ keyCode }) => {
-        if (keyCode === 13) {
+        if (keyCode === 13)
             toggleTimer();
-            console.log("enter");
-        }
     }, [running]);
 
     useEffect(() => {
@@ -43,30 +39,22 @@ export const Timer = ({ name, onSwitch }) => {
     }, [countdown]);
 
     useEffect(() => {
-        console.log("useEffectName");
-        
         clearInterval(intervalRef);
         setCountdown(60);
         toggleTimer();
     }, [name]);
 
     const switchPlayer = () => {
-        console.log("switchPlayer");
-        
         clearInterval(intervalRef);
         toggleTimer();
         onSwitch();
     }
 
     const toggleTimer = () => {
-        console.log("toggleTimer");
-        
         if (running) {
-            console.log('pausing');            
             setRunning(false);
             stop();
         } else {
-            console.log('running');
             setRunning(true);
             start();
         }
