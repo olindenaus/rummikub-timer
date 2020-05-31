@@ -1,0 +1,39 @@
+.name-input-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    min-height: 300px;
+    margin-bottom: 16px;
+}
+
+p {
+    margin-bottom: 0;
+}
+
+input {
+    background-color: #3a4250;
+    padding: 2px 10px;
+    border: none;
+    color: white;
+    border-bottom: 2px solid rgb(53, 42, 42);
+    box-sizing: border-box;
+    font-size: 16px;
+    height: 40px;
+    width: 200px;
+    transition: background-color 0.3s linear;
+}
+
+input:focus {
+    outline: none;
+    color: black;
+    background-color: white;
+}
+
+button {
+    /* min-width: 50px;
+    min-height: 50px; */
+    display: block;
+    padding: 10px;
+    border-radius: 5px;
+}
