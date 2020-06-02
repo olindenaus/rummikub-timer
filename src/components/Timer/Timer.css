@@ -3,3 +3,13 @@
     flex-direction: column;
     justify-content: space-evenly;
 }
+
+.blink {
+    animation: blinker 1s linear infinite alternate;
+}
+
+@keyframes blinker {
+    100% {
+        opacity: 20%;
+    }
+}

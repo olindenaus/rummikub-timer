@@ -18,6 +18,10 @@ export const Timer = ({ name, onSwitch }) => {
             toggleTimer();
     }, [running]);
 
+    const clearTimerInterval = () => {
+        setIntervalRef(intervalId => { clearInterval(intervalId); return null });
+    }
+
     useEffect(() => {
         window.addEventListener('keydown', handleEnterButton)
         window.addEventListener('keydown', handleSpaceBarButton);
@@ -29,7 +33,7 @@ export const Timer = ({ name, onSwitch }) => {
 
     useEffect(() => {
         return () => {
-            clearInterval(intervalRef);
+            clearTimerInterval();
         }
     }, [])
 
@@ -39,34 +43,30 @@ export const Timer = ({ name, onSwitch }) => {
     }, [countdown]);
 
     useEffect(() => {
-        clearInterval(intervalRef);
         setCountdown(60);
-        toggleTimer();
+        runTimer();
     }, [name]);
 
     const switchPlayer = () => {
-        clearInterval(intervalRef);
-        toggleTimer();
+        stopTimer();
         onSwitch();
     }
 
+    const runTimer = () => {
+        setRunning(true);
+        setIntervalRef(setInterval(tick, 1000));
+    }
+
+    const stopTimer = () => {
+        setRunning(false);
+        clearTimerInterval();
+    }
+
     const toggleTimer = () => {
-        if (running) {
-            setRunning(false);
-            stop();
-        } else {
-            setRunning(true);
-            start();
-        }
-    }
-
-    const start = () => {
-        let x = setInterval(tick, 1000);
-        setIntervalRef(x);
-    }
-
-    const stop = () => {
-        clearInterval(intervalRef);
+        if (running)
+            stopTimer();
+        else
+            runTimer();
     }
 
     const tick = () => (setCountdown(countdown => countdown - 1))
@@ -84,7 +84,7 @@ export const Timer = ({ name, onSwitch }) => {
     }
 
     return (
-        <div className="timer-container">
+        <div className={`timer-container ${running ? '' : 'blink'}`}>
             <h1>{name}</h1>
             <h1 onClick={toggleTimer}>{displayTime}</h1>
             {/* <button onClick={switchPlayer}>
